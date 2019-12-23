@@ -1,7 +1,7 @@
 <?php
 /*
  * Time Package
- * Copyright (C) 2019 Simplusoft LLC
+ * Copyright (C) 2019 Dynamic Suite Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
