@@ -4,6 +4,9 @@
   "version": "2.0.0",
   "description": "A package for managing formatted times",
   "license": "GPLv3",
+  "depends": [
+    "dynamicsuite >= 3.0.0"
+  ],
   "global": {
     "autoload": "lib",
     "init": "scripts/init.php"
