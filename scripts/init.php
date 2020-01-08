@@ -21,9 +21,4 @@ namespace DynamicSuite\Package\Time;
 use DynamicSuite\Instance;
 
 /** @var Instance $ds */
-if (DS_APCU && !isset($ds->time)) {
-    $ds->registerGlobal('time', new Time());
-    $ds->save();
-} else {
-    $ds->registerGlobal('time', new Time());
-}
+$ds->registerPackage('time', new Time());
