@@ -17,8 +17,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-namespace DynamicSuite\Package\Time;
-use DynamicSuite\DSConfig;
+/** @noinspection PhpUnused */
+
+namespace DynamicSuite\Pkg\Time;
+use DynamicSuite\Base\DSConfig;
 
 /**
  * Class Config.
@@ -39,28 +41,28 @@ class Config extends DSConfig
      *
      * @var string
      */
-    protected $timestamp_format = 'm/d/Y \a\t g:i A';
+    protected string $timestamp_format = 'm/d/Y \a\t g:i A';
 
     /**
      * Time print format.
      *
      * @var string
      */
-    protected $time_format = 'g:i A';
+    protected string $time_format = 'g:i A';
 
     /**
      * Date print format.
      *
      * @var string
      */
-    protected $date_format = 'm/d/Y';
+    protected string $date_format = 'm/d/Y';
 
     /**
      * Empty time format.
      *
      * @var string
      */
-    protected $empty_time = 'N/A';
+    protected string $empty_time = 'N/A';
 
     /**
      * Config constructor.

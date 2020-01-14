@@ -17,8 +17,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
  */
 
-namespace DynamicSuite\Package\Time;
-use DynamicSuite\Instance;
+namespace DynamicSuite\Pkg\Time;
+use DynamicSuite\Core\Instance;
 
 /** @var Instance $ds */
 $ds->registerPackage('time', new Time());
