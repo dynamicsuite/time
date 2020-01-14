@@ -24,7 +24,7 @@ namespace DynamicSuite\Pkg\Time;
 /**
  * Class Time.
  *
- * @package DynamicSuite\Package\Time
+ * @package DynamicSuite\Pkg\Time
  * @property Config $cfg
  */
 class Time

@@ -27,7 +27,7 @@ use DynamicSuite\Base\DSConfig;
  *
  * Time class config wrapper.
  *
- * @package DynamicSuite\Package\Time
+ * @package DynamicSuite\Pkg\Time
  * @property string $timestamp_format
  * @property string $time_format
  * @property string $date_format
