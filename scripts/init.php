@@ -18,7 +18,7 @@
  */
 
 namespace DynamicSuite\Pkg\Time;
-use DynamicSuite\Core\Instance;
+use DynamicSuite\Core\DynamicSuite;
 
-/** @var Instance $ds */
-$ds->registerPackage('time', new Time());
+/** @var DynamicSuite $ds */
+$ds->register('time', new Time());

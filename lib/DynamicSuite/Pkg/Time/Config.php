@@ -25,8 +25,6 @@ use DynamicSuite\Base\DSConfig;
 /**
  * Class Config.
  *
- * Time class config wrapper.
- *
  * @package DynamicSuite\Pkg\Time
  * @property string $timestamp_format
  * @property string $time_format
