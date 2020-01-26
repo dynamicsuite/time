@@ -21,8 +21,6 @@
 
 namespace DynamicSuite\Pkg\Time;
 
-use DynamicSuite\Core\DynamicSuite;
-
 /**
  * Class Time.
  *
@@ -40,18 +38,14 @@ class Time
     protected Config $cfg;
 
     /**
-     * Time constructor.
+     * Initialize the package class.
      *
-     * @return void
+     * @return Time
      */
-    public function __construct()
+    public function init(): Time
     {
-        $hash = DynamicSuite::getHash('dspkg-time-cfg');
-        if (DS_CACHING && apcu_exists($hash)) {
-            $this->cfg = apcu_fetch($hash);
-        } else {
-            $this->cfg = new Config('time');
-        }
+        $this->cfg = new Config('time');
+        return $this;
     }
 
     /**
