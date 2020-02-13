@@ -38,14 +38,13 @@ class Time
     protected Config $cfg;
 
     /**
-     * Initialize the package class.
+     * Time constructor.
      *
-     * @return Time
+     * @return void
      */
-    public function init(): Time
+    public function __construct()
     {
         $this->cfg = new Config('time');
-        return $this;
     }
 
     /**
