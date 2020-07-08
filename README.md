@@ -1,8 +1,8 @@
 ## Dynamic Suite Time Formatting Library
 
-This library is used to standardize time formats across an instance.
+A library to standardize time formats across an instance.
 
-A config may be created at `config/time.json` with the following parameter:
+Configure via `config/time.json` with the following parameters:
 
 ```
 {
@@ -13,6 +13,8 @@ A config may be created at `config/time.json` with the following parameter:
 }
 ```
 
-If the parameter is not given, a the default (shown above) value will be used.
+Missing parameters will be replaced with the default (shown above).
 
 You can read more about formatting [here](https://www.php.net/manual/en/function.date.php).
+
+Official documentation [here](https://dynamicsuite.io/official-packages/time).

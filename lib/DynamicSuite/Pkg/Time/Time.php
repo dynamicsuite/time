@@ -25,9 +25,8 @@ namespace DynamicSuite\Pkg\Time;
  * Class Time.
  *
  * @package DynamicSuite\Pkg\Time
- * @property Config $cfg
  */
-class Time
+final class Time
 {
 
     /**
@@ -35,16 +34,24 @@ class Time
      *
      * @var Config
      */
-    protected Config $cfg;
+    protected static ?Config $cfg = null;
 
     /**
-     * Time constructor.
+     * Initialize the class configuration.
      *
      * @return void
      */
-    public function __construct()
+    public static function init(): void
     {
-        $this->cfg = new Config('time');
+        $hash = md5(__DIR__);
+        if (DS_CACHING && apcu_exists($hash)) {
+            self::$cfg = apcu_fetch($hash);
+        } else {
+            self::$cfg = new Config('time');
+            if (DS_CACHING) {
+                apcu_store($hash, self::$cfg);
+            }
+        }
     }
 
     /**
@@ -53,9 +60,14 @@ class Time
      * @param string $timestamp
      * @return string
      */
-    public function atom(string $timestamp = null): string
+    public static function atom(string $timestamp = null): string
     {
-        return $timestamp ? date(DATE_ATOM, strtotime($timestamp)) : $this->cfg->empty_time;
+        if (!self::$cfg) {
+            self::init();
+        }
+        return $timestamp
+            ? date(DATE_ATOM, strtotime($timestamp))
+            : self::$cfg->empty_time;
     }
 
     /**
@@ -64,9 +76,14 @@ class Time
      * @param string $time
      * @return string
      */
-    public function time(string $time = null): string
+    public static function time(string $time = null): string
     {
-        return $time ? date($this->cfg->time_format, strtotime($time)) : $this->cfg->empty_time;
+        if (!self::$cfg) {
+            self::init();
+        }
+        return $time
+            ? date(self::$cfg->time_format, strtotime($time))
+            : self::$cfg->empty_time;
     }
 
     /**
@@ -75,9 +92,14 @@ class Time
      * @param string $date
      * @return string
      */
-    public function date(string $date = null): string
+    public static function date(string $date = null): string
     {
-        return $date ? date($this->cfg->date_format, strtotime($date)) : $this->cfg->empty_time;
+        if (!self::$cfg) {
+            self::init();
+        }
+        return $date
+            ? date(self::$cfg->date_format, strtotime($date))
+            : self::$cfg->empty_time;
     }
 
     /**
@@ -86,9 +108,14 @@ class Time
      * @param string $timestamp
      * @return string
      */
-    public function timestamp(string $timestamp = null): string
+    public static function timestamp(string $timestamp = null): string
     {
-        return $timestamp ? date($this->cfg->timestamp_format, strtotime($timestamp)) : $this->cfg->empty_time;
+        if (!self::$cfg) {
+            self::init();
+        }
+        return $timestamp
+            ? date(self::$cfg->timestamp_format, strtotime($timestamp))
+            : self::$cfg->empty_time;
     }
 
 }
