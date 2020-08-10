@@ -32,7 +32,7 @@ final class Time
     /**
      * Time config.
      *
-     * @var Config
+     * @var Config|null
      */
     protected static ?Config $cfg = null;
 
