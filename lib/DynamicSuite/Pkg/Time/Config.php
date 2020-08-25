@@ -20,7 +20,7 @@
 /** @noinspection PhpUnused */
 
 namespace DynamicSuite\Pkg\Time;
-use DynamicSuite\Base\DSConfig;
+use DynamicSuite\Core\GlobalConfig;
 
 /**
  * Class Config.
@@ -31,7 +31,7 @@ use DynamicSuite\Base\DSConfig;
  * @property string $date_format
  * @property string $empty_time
  */
-class Config extends DSConfig
+class Config extends GlobalConfig
 {
 
     /**
