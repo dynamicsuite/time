@@ -34,7 +34,7 @@ final class Time
      *
      * @var Config|null
      */
-    protected static ?Config $cfg = null;
+    public static ?Config $cfg = null;
 
     /**
      * Initialize the class configuration.
