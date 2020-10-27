@@ -1,7 +1,6 @@
 <?php
-/*
- * Time Package
- * Copyright (C) 2020 Dynamic Suite Team
+/**
+ * Time core.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,9 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ *
+ * @package AUI
+ * @author Grant Martin <commgdog@gmail.com>
+ * @copyright  2020 Dynamic Suite Team
+ * @noinspection PhpUnused
  */
-
-/** @noinspection PhpUnused */
 
 namespace DynamicSuite\Pkg\Time;
 
@@ -37,6 +39,13 @@ final class Time
     public static ?Config $cfg = null;
 
     /**
+     * If the timezone is set.
+     *
+     * @var bool
+     */
+    public static bool $timezone_set = false;
+
+    /**
      * Initialize the class configuration.
      *
      * @return void
@@ -52,70 +61,115 @@ final class Time
                 apcu_store($hash, self::$cfg);
             }
         }
+        if (!self::$timezone_set) {
+            self::setTimezone(self::$cfg->default_timezone);
+        }
+    }
+
+    /**
+     * Set the timezone for all methods.
+     *
+     * @param string|null $timezone
+     * @return void
+     */
+    public static function setTimezone(?string $timezone = null): void
+    {
+        if ($timezone) {
+            date_default_timezone_set($timezone);
+        } elseif (self::$cfg->default_timezone) {
+            date_default_timezone_set(self::$cfg->default_timezone);
+        } else {
+            date_default_timezone_set('UTC');
+        }
+        self::$timezone_set = true;
     }
 
     /**
      * Format a given time to RFC3339 format.
      *
-     * @param string $timestamp
+     * @param int|string|null $timestamp
      * @return string
      */
-    public static function atom(string $timestamp = null): string
+    public static function atom($timestamp = null): string
     {
         if (!self::$cfg) {
             self::init();
         }
-        return $timestamp
-            ? date(DATE_ATOM, strtotime($timestamp))
-            : self::$cfg->empty_time;
+        if (!is_int($timestamp) && !$timestamp !== null) {
+            $timestamp = strtotime($timestamp);
+        }
+        return $timestamp ? date(DATE_ATOM, $timestamp) : self::$cfg->empty_time;
     }
 
     /**
      * Format a given time to the configured format.
      *
-     * @param string $time
+     * @param int|string|null $time
      * @return string
      */
-    public static function time(string $time = null): string
+    public static function time($time = null): string
     {
         if (!self::$cfg) {
             self::init();
         }
-        return $time
-            ? date(self::$cfg->time_format, strtotime($time))
-            : self::$cfg->empty_time;
+        if (!is_int($time) && !$time !== null) {
+            $time = strtotime($time);
+        }
+        return $time ? date(self::$cfg->time_format, $time) : self::$cfg->empty_time;
     }
 
     /**
      * Format a given date to the configured format.
      *
-     * @param string $date
+     * @param int|string|null $date
      * @return string
      */
-    public static function date(string $date = null): string
+    public static function date($date = null): string
     {
         if (!self::$cfg) {
             self::init();
         }
-        return $date
-            ? date(self::$cfg->date_format, strtotime($date))
-            : self::$cfg->empty_time;
+        if (!is_int($date) && !$date !== null) {
+            $date = strtotime($date);
+        }
+        return $date ? date(self::$cfg->date_format, $date) : self::$cfg->empty_time;
     }
 
     /**
      * Format a given timestamp to the configured format.
      *
-     * @param string $timestamp
+     * @param int|string|null $timestamp
      * @return string
      */
-    public static function timestamp(string $timestamp = null): string
+    public static function timestamp($timestamp = null): string
     {
         if (!self::$cfg) {
             self::init();
         }
-        return $timestamp
-            ? date(self::$cfg->timestamp_format, strtotime($timestamp))
-            : self::$cfg->empty_time;
+        if (!is_int($timestamp) && !$timestamp !== null) {
+            $timestamp = strtotime($timestamp);
+        }
+        return $timestamp ? date(self::$cfg->timestamp_format, $timestamp) : self::$cfg->empty_time;
+    }
+
+    /**
+     * Get a string time/date/timestamp as an int for storage.
+     *
+     * @param int|string|null $time
+     * @return int
+     */
+    public static function asInt($time = null): int
+    {
+        if (!self::$cfg) {
+            self::init();
+        }
+        if ($time === null) {
+            return time();
+        } elseif (!is_int($time)) {
+            return strtotime($time);
+        } else {
+            return $time;
+        }
     }
 
 }
