@@ -39,13 +39,6 @@ final class Time
     public static ?Config $cfg = null;
 
     /**
-     * If the timezone is set.
-     *
-     * @var bool
-     */
-    public static bool $timezone_set = false;
-
-    /**
      * Initialize the class configuration.
      *
      * @return void
@@ -61,27 +54,6 @@ final class Time
                 apcu_store($hash, self::$cfg);
             }
         }
-        if (!self::$timezone_set) {
-            self::setTimezone(self::$cfg->default_timezone);
-        }
-    }
-
-    /**
-     * Set the timezone for all methods.
-     *
-     * @param string|null $timezone
-     * @return void
-     */
-    public static function setTimezone(?string $timezone = null): void
-    {
-        if ($timezone) {
-            date_default_timezone_set($timezone);
-        } elseif (self::$cfg->default_timezone) {
-            date_default_timezone_set(self::$cfg->default_timezone);
-        } else {
-            date_default_timezone_set('UTC');
-        }
-        self::$timezone_set = true;
     }
 
     /**
