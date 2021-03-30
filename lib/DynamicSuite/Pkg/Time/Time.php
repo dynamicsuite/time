@@ -144,4 +144,44 @@ final class Time
         }
     }
 
+    /**
+     * Get a nicely formatted "time since" string.
+     *
+     * @param int|string|null $since
+     * @return string
+     */
+    public static function since($since = null): string
+    {
+        if (!self::$cfg) {
+            self::init();
+        }
+        if (!is_int($since) && !$since !== null) {
+            $since = strtotime($since);
+        }
+        if (!$since) {
+            return self::$cfg->empty_time;
+        }
+        $since = time() - $since;
+        $chunks = [
+            [31536000, 'year'],
+            [2592000, 'month'],
+            [604800, 'week'],
+            [86400, 'day'],
+            [3600, 'hour'],
+            [60, 'minute'],
+            [1, 'second']
+        ];
+        $name = '';
+        $count = 0;
+        for ($i = 0; $i < 7; $i++) {
+            $seconds = $chunks[$i][0];
+            $name = $chunks[$i][1];
+            $count = (int) floor($since / $seconds);
+            if ($count !== 0) {
+                break;
+            }
+        }
+        return $count == 1 ? "1 $name" : "$count {$name}s";
+    }
+
 }
