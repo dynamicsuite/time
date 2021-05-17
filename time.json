@@ -5,6 +5,6 @@
   "description": "A package for managing formatted times",
   "license": "GPLv3",
   "autoload": [
-    "lib/"
+    "libraries/"
   ]
 }
