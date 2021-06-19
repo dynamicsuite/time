@@ -35,15 +35,7 @@ final class Time
      */
     public static function init(): void
     {
-        $hash = md5(__FILE__);
-        if (DS_CACHING && apcu_exists($hash)) {
-            self::$cfg = apcu_fetch($hash);
-        } else {
-            self::$cfg = new Config('time');
-            if (DS_CACHING) {
-                apcu_store($hash, self::$cfg);
-            }
-        }
+        self::$cfg = new Config('time');
     }
 
     /**
