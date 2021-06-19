@@ -16,7 +16,7 @@ namespace DynamicSuite\Time;
 /**
  * Class Time.
  *
- * @package DynamicSuite\Pkg\Time
+ * @package DynamicSuite\Time
  */
 final class Time
 {
