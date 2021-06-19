@@ -52,7 +52,7 @@ final class Time
      * @param int|string|null $timestamp
      * @return string
      */
-    public static function atom($timestamp = null): string
+    public static function atom(int | string | null $timestamp = null): string
     {
         if (!self::$cfg) {
             self::init();
@@ -69,7 +69,7 @@ final class Time
      * @param int|string|null $time
      * @return string
      */
-    public static function time($time = null): string
+    public static function time(int | string | null $time = null): string
     {
         if (!self::$cfg) {
             self::init();
@@ -86,7 +86,7 @@ final class Time
      * @param int|string|null $date
      * @return string
      */
-    public static function date($date = null): string
+    public static function date(int | string | null $date = null): string
     {
         if (!self::$cfg) {
             self::init();
@@ -103,7 +103,7 @@ final class Time
      * @param int|string|null $timestamp
      * @return string
      */
-    public static function timestamp($timestamp = null): string
+    public static function timestamp(int | string | null $timestamp = null): string
     {
         if (!self::$cfg) {
             self::init();
@@ -120,7 +120,7 @@ final class Time
      * @param int|string|null $time
      * @return int
      */
-    public static function asInt($time = null): int
+    public static function asInt(int | string | null $time = null): int
     {
         if (!self::$cfg) {
             self::init();
@@ -140,7 +140,7 @@ final class Time
      * @param int|string|null $since
      * @return string
      */
-    public static function since($since = null): string
+    public static function since(int | string | null $since = null): string
     {
         if (!self::$cfg) {
             self::init();
