@@ -166,4 +166,48 @@ final class Time
         return $count == 1 ? "1 $name" : "$count {$name}s";
     }
 
+    /**
+     * Compare two dates.
+     *
+     * If the second date is not given or null, the current date will be used for this value.
+     *
+     * Return values if:
+     *   1 - Date #1 is greater than Date #2
+     *  -1 - Date #1 is less than Date #2
+     *   0 - Both dates are equal
+     *
+     * @param int|string $date_1
+     * @param int|string|null $date_2
+     * @return int
+     */
+    public static function dateCompare(int|string $date_1, int|string|null $date_2 = null): int
+    {
+        if ($date_2 === null) {
+            $date_2 = date('Y-m-d');
+        }
+        $date_1 = is_string($date_1) ? strtotime(date('Y-m-d', strtotime($date_1))) : strtotime(date('Y-m-d', $date_1));
+        $date_2 = is_string($date_2) ? strtotime(date('Y-m-d', strtotime($date_2))) : strtotime(date('Y-m-d', $date_2));
+        if ($date_1 > $date_2) {
+            return 1;
+        } elseif ($date_1 < $date_2) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Get the integer representation of a date.
+     *
+     * @param int|string|null $date
+     * @return int|null
+     */
+    public static function toIntDate(int|string|null $date): int|null
+    {
+        if (!$date) {
+            return null;
+        }
+        return strtotime(date('Y-m-d', is_string($date) ? strtotime($date) : $date));
+    }
+
 }
