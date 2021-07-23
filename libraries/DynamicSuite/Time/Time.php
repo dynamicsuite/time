@@ -100,7 +100,7 @@ final class Time
         if (!self::$cfg) {
             self::init();
         }
-        if (!is_int($timestamp) && !$timestamp !== null) {
+        if (!is_numeric($timestamp) && !$timestamp !== null) {
             $timestamp = strtotime($timestamp);
         }
         return $timestamp ? date(self::$cfg->timestamp_format, $timestamp) : self::$cfg->empty_time;
