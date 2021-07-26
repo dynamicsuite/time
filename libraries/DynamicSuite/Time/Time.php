@@ -66,7 +66,7 @@ final class Time
         if (!self::$cfg) {
             self::init();
         }
-        if (!is_int($time) && !$time !== null) {
+        if (!is_numeric($time) && !$time !== null) {
             $time = strtotime($time);
         }
         return $time ? date(self::$cfg->time_format, $time) : self::$cfg->empty_time;
@@ -83,7 +83,7 @@ final class Time
         if (!self::$cfg) {
             self::init();
         }
-        if (!is_int($date) && !$date !== null) {
+        if (!is_numeric($date) && !$date !== null) {
             $date = strtotime($date);
         }
         return $date ? date(self::$cfg->date_format, $date) : self::$cfg->empty_time;
