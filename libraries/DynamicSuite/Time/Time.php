@@ -130,9 +130,10 @@ final class Time
      * Get a nicely formatted "time since" string.
      *
      * @param int|string|null $since
+     * @param bool $in_days
      * @return string
      */
-    public static function since(int | string | null $since = null): string
+    public static function since(int | string | null $since = null, bool $in_days = false): string
     {
         if (!self::$cfg) {
             self::init();
@@ -144,7 +145,7 @@ final class Time
             return self::$cfg->empty_time;
         }
         $since = time() - $since;
-        $chunks = [
+        $chunks = $in_days ? [[86400, 'day']] : [
             [31536000, 'year'],
             [2592000, 'month'],
             [604800, 'week'],
@@ -155,7 +156,8 @@ final class Time
         ];
         $name = '';
         $count = 0;
-        for ($i = 0; $i < 7; $i++) {
+        $chunk_count = count($chunks);
+        for ($i = 0; $i < $chunk_count; $i++) {
             $seconds = $chunks[$i][0];
             $name = $chunks[$i][1];
             $count = (int) floor($since / $seconds);
