@@ -1,12 +1,10 @@
 {
   "name": "Time",
   "author": "Dynamic Suite Team",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "A package for managing formatted times",
   "license": "GPLv3",
-  "global": {
-    "autoload": [
-      "lib"
-    ]
-  }
+  "autoload": [
+    "libraries/"
+  ]
 }
